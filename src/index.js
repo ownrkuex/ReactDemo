@@ -2,6 +2,35 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      time: new Date()
+    };
+  }
+
+  componentDidMount() {
+    // timer只是一个普通字段，不是状态也不是参数
+    this.timer = setInterval(() => this.setState({
+      time: new Date()
+    }), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.time.toLocaleTimeString()}</h2>
+      </div>
+    );
+  }
+}
+
 function Square(props) {
   return (
     <button className={props.highLight ? "square square-highlight" : "square"} onClick={() => props.onClick(props.id)}>
@@ -145,6 +174,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
+          <Clock />
           <Board
             winLoc={this.state.winInfo.loc}
             status={current}
