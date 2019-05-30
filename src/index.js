@@ -47,7 +47,7 @@ class Board extends React.Component {
         id={i}
         value={this.props.status.squares[i]}
         highLight={this.props.winLoc.includes(i)}
-        onClick={i => this.props.onClick(i)}
+        onClick={this.props.onClick}
       />
     );
   }
@@ -98,6 +98,9 @@ class Game extends React.Component {
         loc: []
       }
     }
+
+    this.jumpTo = this.jumpTo.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   calculateWinner(squares) {
@@ -167,18 +170,18 @@ class Game extends React.Component {
         index={index}
         move={move}
         currentMove={this.state.currentMove}
-        onClick={index => this.jumpTo(index)}
+        onClick={this.jumpTo}
       />
     ));
 
     return (
       <div className="game">
+        <Clock />
         <div className="game-board">
-          <Clock />
           <Board
             winLoc={this.state.winInfo.loc}
             status={current}
-            onClick={i => this.handleClick(i)}
+            onClick={this.handleClick}
           />
         </div>
         <div className="game-info">
