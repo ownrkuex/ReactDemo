@@ -96,7 +96,8 @@ class Game extends React.Component {
       winInfo: {
         winner: null,
         loc: []
-      }
+      },
+      formTest: null
     }
 
     this.jumpTo = this.jumpTo.bind(this);
@@ -187,6 +188,11 @@ class Game extends React.Component {
         <div className="game-info">
           <div>{info}</div>
           <ol>{moves}</ol>
+        </div>
+        <div>
+          <form>
+            <input name="formTest" type="text" value={null} onChange={e => this.setState({formTest: e.target.value})}/>
+          </form>
         </div>
       </div>
     );
